@@ -438,7 +438,8 @@ namespace UI
                 netWorkList.Add(obj["Name"].ToString());
 
             }
-            this.cmbNetWork.DataSource = netWorkList;
+            this.dataGridView1.DataSource = netWorkList;
+
         }
     }
 }
