@@ -1,6 +1,4 @@
 ﻿using System;
-using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
 using System.Windows.Forms;
 
 namespace UI
@@ -17,7 +15,7 @@ namespace UI
         {
             MODEL.Config.RoleNumber = Convert.ToInt32(textBox1.Text);
             MODEL.TempConfig tc = MODEL.Config.GetTempConfig();
-            YanBinPower.Serializer.ObjectToFile(tc,"config.config");
+            YanBinPower.Serializer.ObjectToFile(tc, "config.config");
         }
 
         private void Button2_Click(object sender, EventArgs e)
