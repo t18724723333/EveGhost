@@ -1,5 +1,6 @@
 ﻿using MODEL;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Reflection;
@@ -423,6 +424,21 @@ namespace UI
         private void button8_Click(object sender, EventArgs e)
         {
             dataGridView1.DataSource = null;
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            string manage = "SELECT * From Win32_NetworkAdapter";
+            ManagementObjectSearcher searcher = new ManagementObjectSearcher(manage);
+            ManagementObjectCollection collection = searcher.Get();
+            List<string> netWorkList = new List<string>();
+
+            foreach (ManagementObject obj in collection)
+            {
+                netWorkList.Add(obj["Name"].ToString());
+
+            }
+            this.cmbNetWork.DataSource = netWorkList;
         }
     }
 }
