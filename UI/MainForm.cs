@@ -43,7 +43,7 @@ namespace UI
         void MainInit()
         {
             Model.MainAccount = new DTAccount();
-
+            Model.MainAccount.Rows.Add();
         }
         /// <summary>
         /// 注册大漠
@@ -277,6 +277,7 @@ namespace UI
             {
                 this.MainTabControl.TabPages.Add(str);
                 this.MainTabControl.SelectTab((this.MainTabControl.TabPages.Count - 1));
+
                 myForm.FormBorderStyle = FormBorderStyle.None;
                 myForm.TopLevel = false;
 
@@ -399,6 +400,7 @@ namespace UI
                 tabRect.Height = 15;
                 if ((((x > tabRect.X) && (x < tabRect.Right)) && (y > tabRect.Y)) && (y < tabRect.Bottom))
                 {
+
                     this.MainTabControl.TabPages.Remove(this.MainTabControl.SelectedTab);
                 }
             }
