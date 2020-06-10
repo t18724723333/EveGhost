@@ -23,5 +23,10 @@ namespace UI
         {
             textBox1.Text = MODEL.Config.RoleNumber + string.Empty;
         }
+
+        private void ConfigForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

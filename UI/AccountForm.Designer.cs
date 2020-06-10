@@ -30,12 +30,12 @@
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.AccountDataGridView = new System.Windows.Forms.DataGridView();
+            this.button3 = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.button3 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -74,6 +74,25 @@
             this.AccountDataGridView.RowTemplate.Height = 23;
             this.AccountDataGridView.Size = new System.Drawing.Size(692, 427);
             this.AccountDataGridView.TabIndex = 0;
+
+            this.AccountDataGridView.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.AccountDataGridView_RowPostPaint);
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(5, 133);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(207, 35);
+            this.button3.TabIndex = 4;
+            this.button3.Text = "保存账号组";
+            this.button3.UseVisualStyleBackColor = true;
+            // 
+            // label2
+            // 
+            this.label2.Location = new System.Drawing.Point(3, 266);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(228, 161);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "label2";
             // 
             // button2
             // 
@@ -109,23 +128,6 @@
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(209, 20);
             this.comboBox1.TabIndex = 0;
-            // 
-            // label2
-            // 
-            this.label2.Location = new System.Drawing.Point(3, 266);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(228, 161);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "label2";
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(5, 133);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(207, 35);
-            this.button3.TabIndex = 4;
-            this.button3.Text = "保存账号组";
-            this.button3.UseVisualStyleBackColor = true;
             // 
             // AccountForm
             // 

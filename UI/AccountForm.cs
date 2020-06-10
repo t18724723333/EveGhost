@@ -20,7 +20,11 @@ namespace UI
 
         private void AccountForm_Load(object sender, EventArgs e)
         {
-            foreach (Control control in splitContainer1.Panel2.Controls) { if (control is Button _bt) { _bt.Click += new EventHandler(ALL_Click); } }
+            ControlHelper.ButtonAddClickHandler(splitContainer1.Panel2.Controls, new EventHandler(ALL_Click));
+            ControlHelper controlHelper = new ControlHelper("预警状态", dtaccoount, AccountDataGridView);
+            controlHelper.DataGridViewADDCurrentCellChangedHandler(AccountDataGridView);
+            controlHelper = new ControlHelper("状态", dtaccoount, AccountDataGridView);
+            controlHelper.DataGridViewADDCurrentCellChangedHandler(AccountDataGridView);
             AccountDataGridView.DataSource = dtaccoount;
         }
 
@@ -45,7 +49,7 @@ namespace UI
                         {
                             dtaccoount.ReadXml(path);
                         }
-                        if (dtaccoount.Rows.Count ==0)
+                        if (dtaccoount.Rows.Count == 0)
                         {
                             dtaccoount.Rows.Add();
                         }
@@ -54,6 +58,21 @@ namespace UI
                     case "保存账号组":
                         if (dtaccoount.Rows.Count > 0)
                         {
+
+                            foreach (DataRow item in dtaccoount.Rows)
+                            {
+                                dtaccoount.Columns.Contains("");
+                            }
+                            //AccountDataGridView.CurrentCell = ;
+                            AccountDataGridView.Rows[0].Cells[0].Selected = false;
+                            AccountDataGridView.Rows[0].Cells[1].Selected = true;
+                            AccountDataGridView.Rows[1].Cells[1].Selected = true;
+                            DataView dv = new DataView(dtaccoount);
+                            DataTable _datatable = dv.ToTable(true, "角色名称");
+                            foreach (DataRow item in _datatable.Rows)
+                            {
+                                Console.WriteLine(item[0]);
+                            }
                             dtaccoount.WriteXml(YanBinPower.PathHelper.GetFilePath(PathFileList.Account, comboBox1.Text), XmlWriteMode.WriteSchema);
                         }
                         break;
@@ -63,10 +82,27 @@ namespace UI
                 }
             }
         }
+        public void ScanDataOnly()
+        {
 
+        }
+        private void AccountDataGridView_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            ControlHelper.DataGridViewDrawIndex(AccountDataGridView, e);
+        }
 
+        //private void AccountDataGridView_CurrentCellChanged(object sender, EventArgs e)
+        //{
+        //    if (sender is DataGridView _dgv)
+        //    {
+        //        Console.WriteLine(_dgv.Columns["预警"].Index);
+        //        //if (_dgv.CurrentCell.ColumnIndex == _dgv.Columns.IndexOf(_dgv.Columns["预警状态"]))
+        //        //{
+        //        //    Console.WriteLine(_dgv.CurrentCell.RowIndex);
+        //        //}
 
+        //    }
 
-
+        //}
     }
 }
