@@ -11,7 +11,7 @@ namespace MODEL
     [Serializable]
     public class MainDT : DataTable
     {
-        public MainDT() { Columns.Add("选择", typeof(Boolean)); Columns.Add("序号", typeof(Int32)); }
+        public MainDT() { Columns.Add("选择", typeof(Boolean));  }
 
         public string GetString(string colname)
         {
@@ -41,6 +41,7 @@ namespace MODEL
             Columns.Add("眼睛号序号", typeof(Int32));
             Columns.Add("预警状态", typeof(Int32));
             Columns.Add("状态", typeof(String));
+
         }
     }
 }
