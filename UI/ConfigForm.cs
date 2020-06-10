@@ -21,10 +21,6 @@ namespace UI
         private void Button2_Click(object sender, EventArgs e)
         {
             textBox1.Text = MODEL.Config.RoleNumber + string.Empty;
-
-
-
-
         }
     }
 }

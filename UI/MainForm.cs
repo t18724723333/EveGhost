@@ -1,5 +1,6 @@
 ﻿using MODEL;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Reflection;
@@ -43,7 +44,7 @@ namespace UI
         void MainInit()
         {
             Model.MainAccount = new DTAccount();
-
+            Model.MainAccount.Rows.Add();
         }
         /// <summary>
         /// 注册大漠
@@ -277,6 +278,7 @@ namespace UI
             {
                 this.MainTabControl.TabPages.Add(str);
                 this.MainTabControl.SelectTab((this.MainTabControl.TabPages.Count - 1));
+
                 myForm.FormBorderStyle = FormBorderStyle.None;
                 myForm.TopLevel = false;
 
@@ -399,6 +401,7 @@ namespace UI
                 tabRect.Height = 15;
                 if ((((x > tabRect.X) && (x < tabRect.Right)) && (y > tabRect.Y)) && (y < tabRect.Bottom))
                 {
+
                     this.MainTabControl.TabPages.Remove(this.MainTabControl.SelectedTab);
                 }
             }
@@ -421,6 +424,22 @@ namespace UI
         private void button8_Click(object sender, EventArgs e)
         {
             dataGridView1.DataSource = null;
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            string manage = "SELECT * From Win32_NetworkAdapter";
+            ManagementObjectSearcher searcher = new ManagementObjectSearcher(manage);
+            ManagementObjectCollection collection = searcher.Get();
+            List<string> netWorkList = new List<string>();
+
+            foreach (ManagementObject obj in collection)
+            {
+                netWorkList.Add(obj["Name"].ToString());
+
+            }
+            this.dataGridView1.DataSource = netWorkList;
+
         }
     }
 }
