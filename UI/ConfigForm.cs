@@ -13,9 +13,10 @@ namespace UI
 
         private void Button1_Click(object sender, EventArgs e)
         {
+
             MODEL.Config.RoleNumber = Convert.ToInt32(textBox1.Text);
             MODEL.TempConfig tc = MODEL.Config.GetTempConfig();
-            YanBinPower.Serializer.ObjectToFile(tc, "config.config");
+            YanBinPower.Serializer.ObjectToFile(tc,YanBinPower.PathHelper.GetFilePath(YanBinPower.PathFileList.Config, "Config"));
         }
 
         private void Button2_Click(object sender, EventArgs e)

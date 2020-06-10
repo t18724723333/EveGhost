@@ -2,7 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
 
@@ -33,6 +35,7 @@ namespace UI
 
         private void Form1_Load(object sender, EventArgs e)
         {
+
             SetupToolStripMenuItemHandler();
             RealConfig();
             MainInit();
@@ -43,7 +46,7 @@ namespace UI
         /// </summary>
         void MainInit()
         {
-            Model.MainAccount = new DTAccount();
+            Model.MainAccount = new MODEL.DTAccount();
             Model.MainAccount.Rows.Add();
         }
         /// <summary>
@@ -60,8 +63,8 @@ namespace UI
         /// </summary>
         void RealConfig()
         {
-            TempConfig tc = YanBinPower.Serializer.FileToObject<TempConfig>("config.config") as TempConfig;
-            Config.GetConfig(tc);
+            string _cfg = YanBinPower.PathHelper.GetFilePath(YanBinPower.PathFileList.Config, "Config");
+            Config.GetConfig((File.Exists(_cfg) && YanBinPower.Serializer.FileToObject<TempConfig>(_cfg) is TempConfig _tc) ? _tc : new TempConfig());
         }
 
 
@@ -258,6 +261,9 @@ namespace UI
                 case "监控中心":
                     this.Add_TabPage(str + "  ", new Form2());
                     break;
+                case "账号管理":
+                    this.Add_TabPage(str + "  ", new AccountForm());
+                    break;
                 default:
                     Console.WriteLine(str);
                     break;
@@ -428,17 +434,17 @@ namespace UI
 
         private void button9_Click(object sender, EventArgs e)
         {
-            string manage = "SELECT * From Win32_NetworkAdapter";
-            ManagementObjectSearcher searcher = new ManagementObjectSearcher(manage);
-            ManagementObjectCollection collection = searcher.Get();
-            List<string> netWorkList = new List<string>();
+            //string manage = "SELECT * From Win32_NetworkAdapter";
+            //ManagementObjectSearcher searcher = new ManagementObjectSearcher(manage);
+            //ManagementObjectCollection collection = searcher.Get();
+            //List<string> netWorkList = new List<string>();
 
-            foreach (ManagementObject obj in collection)
-            {
-                netWorkList.Add(obj["Name"].ToString());
+            //foreach (ManagementObject obj in collection)
+            //{
+            //    netWorkList.Add(obj["Name"].ToString());
 
-            }
-            this.dataGridView1.DataSource = netWorkList;
+            //}
+            //this.dataGridView1.DataSource = netWorkList;
 
         }
     }
