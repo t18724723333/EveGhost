@@ -2,7 +2,7 @@
 
 namespace MODEL
 {
-
+    [Serializable]
     public static class Config
     {
 
@@ -10,6 +10,9 @@ namespace MODEL
         /// 角色数量
         /// </summary>
         public static int RoleNumber { get; set; }
+
+
+
         public static void GetConfig(TempConfig tc)
         {
             RoleNumber = tc.RoleNumberTemp;

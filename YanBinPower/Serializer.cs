@@ -53,6 +53,7 @@ namespace YanBinPower
             {
                 T result = formatter.Deserialize(stream) as T;
                 return result;
+
             }
         }
 
@@ -64,12 +65,22 @@ namespace YanBinPower
         /// <returns>对象</returns>
         public static T FileToObject<T>(string path) where T : class
         {
-            using (FileStream stream = new FileStream(path, FileMode.Open))
+            try
             {
-                BinaryFormatter formatter = new BinaryFormatter();
-                T result = formatter.Deserialize(stream) as T;
-                return result;
+                using (FileStream stream = new FileStream(path, FileMode.Open))
+                {
+                    BinaryFormatter formatter = new BinaryFormatter();
+                    T result = formatter.Deserialize(stream) as T;
+                    stream.Flush();
+                    return result;
+                }
             }
+            catch (System.Exception ex)
+            {
+                System.Console.WriteLine(ex);
+                return null;
+
+            }    
         }
         #endregion
     }
