@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MODEL
 {
@@ -24,11 +19,7 @@ namespace MODEL
                 return Rows[0][colname].ToString();
             }
         }
-
-
     }
-
-
 
     [Serializable]
     public class DTAccount : MainDT

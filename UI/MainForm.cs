@@ -7,16 +7,50 @@ using System.Drawing;
 using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
+using BLL;
+using System.Threading;
+using YanBinPower;
+using System.Windows.Forms.VisualStyles;
 
 namespace UI
 {
     public partial class MainForm : Form
     {
         public MainForm() { InitializeComponent(); }
-
-
+        private void Form1_Load(object sender, EventArgs e) { Init(); button2.Text = "开始"; }
+        
+        Thread[] threads = new Thread[10];
         private void Button2_Click(object sender, EventArgs e)
         {
+            int intth = 10;
+            if (button2.Text == "开始")
+            {
+                button2.Text = "结束";
+                for (int i = 0; i < intth; i++)
+                {
+                    threads[i] = new Thread(new ThreadStart(DoWork));
+                    threads[i].Start();
+
+                }
+            }
+            else
+            {
+                button2.Text = "开始";
+                for (int i = 0; i < intth; i++)
+                {
+                    threads[i].Abort();
+                    Console.WriteLine("线程{0}退出",threads[i].ManagedThreadId);
+                    Thread.Sleep(10000);
+
+                }
+            }
+
+
+
+
+
+            //Thread parameterizedThread = new Thread(new ParameterizedThreadStart(DoWorkWithParam));
+            //parameterizedThread.Start("test");
 
             //取flowLayoutPanel控件数
             //textBox1.AppendText(flowLayoutPanel1.Controls.Count + "\r\n");
@@ -31,16 +65,46 @@ namespace UI
             //    }
             //}
         }
-
-
-        private void Form1_Load(object sender, EventArgs e)
+        public static void DoWork()
         {
+            while (true)
+            {
+                try
+                {
+                    Console.WriteLine(YanBinPower.SQLiteHelper.GetInstance().ExecuteNonQuery("INSERT INTO ex2(\"d\") VALUES(1)") + "       " + Thread.CurrentThread.ManagedThreadId);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    Thread.ResetAbort();
+                }
+                finally
+                {
+                    Console.WriteLine("QUIT");
+                    SQLiteHelper.GetInstance().ReleaseConn();
+                }
+            }
 
-            SetupToolStripMenuItemHandler();
+
+
+        }
+
+        public static void DoWorkWithParam(object obj)
+        {
+            string msg = (string)obj;
+            Console.WriteLine("Parameterized Work thread:" + msg);
+        }
+
+        private void Init()
+        {
+            BllContarner.GetMenuStrip(menuStrip1, "1");
+            SetMenuHandler();
+            BllContarner.GetFlowLayoutPanel(flowLayoutPanel1);
             RealConfig();
             MainInit();
             RegDM();
         }
+
         /// <summary>
         /// 系统初始化
         /// </summary>
@@ -63,6 +127,7 @@ namespace UI
         /// </summary>
         void RealConfig()
         {
+
             string _cfg = YanBinPower.PathHelper.GetFilePath(YanBinPower.PathFileList.Config, "Config");
             Config.GetConfig((File.Exists(_cfg) && YanBinPower.Serializer.FileToObject<TempConfig>(_cfg) is TempConfig _tc) ? _tc : new TempConfig());
         }
@@ -109,13 +174,41 @@ namespace UI
         /// <summary>
         /// 设置导航菜单单击事件
         /// </summary>
-        private void SetupToolStripMenuItemHandler()
+        private void SetMenuHandler()
         {
             foreach (ToolStripMenuItem item in menuStrip1.Items) //添加三个事件
             {
-                item.MouseDown += new MouseEventHandler(ALLToolStripMenuItem_MouseDown);
-                item.MouseUp += new MouseEventHandler(ALLToolStripMenuItem_MouseUP);
-                item.MouseMove += new MouseEventHandler(ALLToolStripMenuItem_MouseMove);
+                if (item.DropDownItems.Count > 0)
+                {
+                    SetTSMIHandler(item.DropDownItems);
+                }
+                else
+                {
+                    item.MouseDown += new MouseEventHandler(ALLToolStripMenuItem_MouseDown);
+                    item.MouseUp += new MouseEventHandler(ALLToolStripMenuItem_MouseUP);
+                    item.MouseMove += new MouseEventHandler(ALLToolStripMenuItem_MouseMove);
+                }
+
+            }
+        }
+        /// <summary>
+        /// 递归设置子菜单
+        /// </summary>
+        /// <param name="dropDownItems"></param>
+        private void SetTSMIHandler(ToolStripItemCollection dropDownItems)
+        {
+            foreach (ToolStripMenuItem item in dropDownItems)
+            {
+                if (item.DropDownItems.Count > 0)
+                {
+                    SetTSMIHandler(item.DropDownItems);
+                }
+                else
+                {
+                    item.MouseDown += new MouseEventHandler(ALLToolStripMenuItem_MouseDown);
+                    item.MouseUp += new MouseEventHandler(ALLToolStripMenuItem_MouseUP);
+                    item.MouseMove += new MouseEventHandler(ALLToolStripMenuItem_MouseMove);
+                }
             }
         }
 
@@ -128,7 +221,6 @@ namespace UI
         {
             e.Effect = DragDropEffects.All;
         }
-
         /// <summary>
         /// 左导航拖放中
         /// </summary>
@@ -446,6 +538,11 @@ namespace UI
             //}
             //this.dataGridView1.DataSource = netWorkList;
 
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Console.WriteLine(YanBinPower.SQLiteHelper.GetInstance().ExecuteNonQuery("INSERT INTO ex2(\"d\") VALUES(1)")); ;
         }
     }
 }

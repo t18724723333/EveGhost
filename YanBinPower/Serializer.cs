@@ -80,7 +80,7 @@ namespace YanBinPower
                 System.Console.WriteLine(ex);
                 return null;
 
-            }    
+            }
         }
         #endregion
     }

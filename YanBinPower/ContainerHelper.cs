@@ -1,18 +1,11 @@
-﻿using MODEL;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System;
 using System.Data;
-using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace YanBinPower
 {
-    public class ControlHelper
+    public class ContainerHelper
     {
         /// <summary>
         /// 给Control中的所有Button添加事件
@@ -35,8 +28,8 @@ namespace YanBinPower
         private readonly string strval;
         private readonly ComboBox comboBox = new ComboBox();
         private readonly DataGridView dgv;
-        public ControlHelper() { }
-        public ControlHelper(string val,DataTable dataTable,DataGridView dataGridView)
+        public ContainerHelper() { }
+        public ContainerHelper(string val, DataTable dataTable, DataGridView dataGridView)
         {
             strval = val;
             dgv = dataGridView;
@@ -45,7 +38,7 @@ namespace YanBinPower
             comboBox.DataSource = dTaccount;
         }
 
-        private void comboBox_SelectedIndexChanged(object sender, EventArgs e)
+        private void ComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             dgv.CurrentCell.Value = ((ComboBox)sender).Text;
         }
@@ -57,7 +50,7 @@ namespace YanBinPower
 
         private void ALLCurrentCellChanged(object sender, EventArgs e)
         {
-            if (sender is DataGridView _dgv && _dgv.SelectedCells.Count>0)
+            if (sender is DataGridView _dgv && _dgv.SelectedCells.Count > 0)
             {
                 int colindex = _dgv.Columns[strval].Index;
                 if (_dgv.CurrentCell.ColumnIndex == colindex)
@@ -73,19 +66,6 @@ namespace YanBinPower
                 {
                     comboBox.Visible = false;
                 }
-
-
-                
-                //if (_dgv.CurrentCell.ColumnIndex >0 && )
-                //{
-                //    Console.WriteLine(abc+"   "+);
-                //}
-
-                //if (_dgv.CurrentCell.ColumnIndex == _dgv.Columns.IndexOf(_dgv.Columns["预警状态"]))
-                //{
-                //    Console.WriteLine(_dgv.CurrentCell.RowIndex);
-                //}
-
             }
 
         }

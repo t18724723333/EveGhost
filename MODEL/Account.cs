@@ -2,7 +2,6 @@
 {
     public class Account
     {
-
         /// <summary>
         /// 线程名称
         /// </summary>

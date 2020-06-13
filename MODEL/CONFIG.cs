@@ -11,8 +11,10 @@ namespace MODEL
         /// </summary>
         public static int RoleNumber { get; set; }
 
-
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="tc"></param>
         public static void GetConfig(TempConfig tc)
         {
             RoleNumber = tc.RoleNumberTemp;

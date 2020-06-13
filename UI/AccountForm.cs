@@ -20,10 +20,10 @@ namespace UI
 
         private void AccountForm_Load(object sender, EventArgs e)
         {
-            ControlHelper.ButtonAddClickHandler(splitContainer1.Panel2.Controls, new EventHandler(ALL_Click));
-            ControlHelper controlHelper = new ControlHelper("预警状态", dtaccoount, AccountDataGridView);
+            ContainerHelper.ButtonAddClickHandler(splitContainer1.Panel2.Controls, new EventHandler(ALL_Click));
+            ContainerHelper controlHelper = new ContainerHelper("预警状态", dtaccoount, AccountDataGridView);
             controlHelper.DataGridViewADDCurrentCellChangedHandler(AccountDataGridView);
-            controlHelper = new ControlHelper("状态", dtaccoount, AccountDataGridView);
+            controlHelper = new ContainerHelper("状态", dtaccoount, AccountDataGridView);
             controlHelper.DataGridViewADDCurrentCellChangedHandler(AccountDataGridView);
             AccountDataGridView.DataSource = dtaccoount;
         }
@@ -88,7 +88,7 @@ namespace UI
         }
         private void AccountDataGridView_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
-            ControlHelper.DataGridViewDrawIndex(AccountDataGridView, e);
+            ContainerHelper.DataGridViewDrawIndex(AccountDataGridView, e);
         }
 
         //private void AccountDataGridView_CurrentCellChanged(object sender, EventArgs e)

@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace YanBinPower
 {
@@ -34,23 +31,8 @@ namespace YanBinPower
         /// <param name="pathList">PathFileList</param>
         /// <param name="filename">文件名</param>
         /// <returns></returns>
-        public static string GetFilePath(PathFileList pathList, string filename)
-        {
-            switch (pathList)
-            {
-                case PathFileList.Account:
-                    return GetFilePath("Account", filename, "Acc");
-                case PathFileList.Config:
-                    return GetFilePath("Config", filename, "Config");
-                case PathFileList.Script:
-                    return GetFilePath("Script", filename, "Script");
-                case PathFileList.UserScript:
-                    return GetFilePath("UserScript", filename, "Script");
-                default:
-                    return null;
-            }
-        }
-
+        public static string GetFilePath(PathFileList pathList, string filename) { return GetFilePath(pathList.ToString(), filename, GetPattern(pathList)); }
+        public static string[] GetList(PathFileList pfl) { return GetList(GetPath(pfl.ToString()), GetPattern(pfl), false); }
         public static string[] GetList(string path, string pattern, bool showdirectory)
         {
             List<string> _ls = new List<string>();
@@ -63,34 +45,31 @@ namespace YanBinPower
             }
             catch (Exception e)
             {
-                throw new System.Exception(e.ToString());
+                //throw new System.Exception(e.ToString());
             }
             return _ls.ToArray();
         }
-        public static string[] GetList(PathFileList pfl)
+
+        public static string GetPattern(PathFileList pfl)
         {
-            string _pattern;
             switch (pfl)
             {
                 case PathFileList.Account:
-                    _pattern = "acc";
-                    break;
+                    return "Acc";
                 case PathFileList.Config:
-                    _pattern = "cfg";
-                    break;
+                    return "Config";
                 case PathFileList.Script:
-                    _pattern = "script";
-                    break;
+                    return "Script";
                 case PathFileList.UserScript:
-                    _pattern = "script";
-                    break;
+                    return "Script";
+                case PathFileList.Resources:
+                    return "Png";
                 default:
                     return null;
             }
-
-            return GetList(GetPath(pfl.ToString()), _pattern, false);
         }
     }
+
     /// <summary>
     /// 程序路径文件选择
     /// </summary>
@@ -99,6 +78,7 @@ namespace YanBinPower
         Account = 1,
         Config = 2,
         Script = 4,
-        UserScript = 8
+        UserScript = 8,
+        Resources = 16
     }
 }

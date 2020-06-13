@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.市场中心ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.账号管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.系统设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.监控中心ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -59,7 +60,6 @@
             this.button2 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.市场中心ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -91,7 +91,13 @@
             this.menuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
             this.menuStrip1.Size = new System.Drawing.Size(992, 24);
             this.menuStrip1.TabIndex = 0;
-            this.menuStrip1.Text = "menuStrip1";
+            this.menuStrip1.Text = "mainMenuStrip";
+            // 
+            // 市场中心ToolStripMenuItem
+            // 
+            this.市场中心ToolStripMenuItem.Name = "市场中心ToolStripMenuItem";
+            this.市场中心ToolStripMenuItem.Size = new System.Drawing.Size(65, 20);
+            this.市场中心ToolStripMenuItem.Text = "市场中心";
             // 
             // 账号管理ToolStripMenuItem
             // 
@@ -262,6 +268,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.AutoScroll = true;
             this.tabPage2.Controls.Add(this.button8);
             this.tabPage2.Controls.Add(this.button7);
             this.tabPage2.Controls.Add(this.button6);
@@ -366,6 +373,7 @@
             this.button3.TabIndex = 5;
             this.button3.Text = "button3";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // button2
             // 
@@ -384,12 +392,6 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(320, 277);
             this.textBox1.TabIndex = 3;
-            // 
-            // 市场中心ToolStripMenuItem
-            // 
-            this.市场中心ToolStripMenuItem.Name = "市场中心ToolStripMenuItem";
-            this.市场中心ToolStripMenuItem.Size = new System.Drawing.Size(65, 20);
-            this.市场中心ToolStripMenuItem.Text = "市场中心";
             // 
             // MainForm
             // 
